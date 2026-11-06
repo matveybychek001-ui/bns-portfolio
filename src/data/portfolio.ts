@@ -69,7 +69,7 @@ export const projects: {
   {
     id: 'noir',
     title: 'Noir Studio',
-    href: 'https://arrived-trademark-brook-idea.trycloudflare.com',
+    href: 'https://a872f94e048b82.lhr.life',
     category: 'Сайт студии',
     year: '2026',
     description:
