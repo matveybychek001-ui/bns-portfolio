@@ -48,7 +48,15 @@ export const services: {
   },
 ];
 
-export const projects = [
+export const projects: {
+  id: string;
+  title: string;
+  href?: string;
+  category: string;
+  year: string;
+  description: string;
+  stack: string[];
+}[] = [
   {
     id: 'atlas',
     title: 'Atlas Finance',
@@ -61,6 +69,7 @@ export const projects = [
   {
     id: 'noir',
     title: 'Noir Studio',
+    href: 'https://arrived-trademark-brook-idea.trycloudflare.com',
     category: 'Сайт студии',
     year: '2026',
     description:

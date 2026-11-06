@@ -71,8 +71,14 @@ export function ProjectScene({ id }: { id: string }) {
 
   if (id === 'noir') {
     return (
-      <div className="stage stage-grid" aria-hidden="true">
-        <span /><span /><span /><span />
+      <div className="stage stage-camera" aria-hidden="true">
+        <svg viewBox="0 0 168 112" className="stage-camera-svg" focusable="false">
+          <rect x="16" y="34" width="136" height="64" rx="14" />
+          <path d="M58 34l12-14h32l12 14" />
+          <circle cx="84" cy="66" r="20" />
+          <circle className="stage-camera-lens" cx="84" cy="66" r="8" />
+          <circle cx="132" cy="48" r="4" />
+        </svg>
       </div>
     );
   }

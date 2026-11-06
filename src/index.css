@@ -214,7 +214,27 @@
   }
 
   .project-card .stage {
-    @apply h-36 rounded-none border-0 border-b sm:h-44;
+    @apply flex h-28 items-center justify-center rounded-none border-0 border-b sm:h-36;
+  }
+
+  .projects-grid {
+    display: grid;
+    justify-content: center;
+    gap: 1rem;
+    grid-template-columns: minmax(0, min(100%, 19.5rem));
+  }
+
+  @media (min-width: 768px) {
+    .projects-grid {
+      gap: 1.25rem;
+      grid-template-columns: repeat(2, minmax(0, 22rem));
+    }
+  }
+
+  .project-card--link {
+    display: flex;
+    color: inherit;
+    text-decoration: none;
   }
 
   .scene-page {
@@ -362,12 +382,13 @@
   }
 
   .stage-bars {
-    @apply flex h-full items-end gap-2 px-6 pb-6;
+    @apply mx-auto flex h-full w-full max-w-[11.5rem] items-end gap-1.5 px-3 pb-4 sm:max-w-[14rem] sm:gap-2 sm:px-4 sm:pb-5;
   }
 
   .stage-bars span {
-    @apply block flex-1 origin-bottom rounded-t-md bg-white/80 motion-safe:animate-bar-rise;
-    height: 78%;
+    @apply block min-w-0 flex-1 origin-bottom rounded-t-md bg-white/80 motion-safe:animate-bar-rise;
+    height: 72%;
+    max-width: 1.35rem;
   }
 
   .stage-bars span:nth-child(2) { height: 48%; animation-delay: 120ms; background: rgba(255,255,255,0.45); }
@@ -391,11 +412,14 @@
 
   .stage-cal {
     display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    grid-template-rows: repeat(2, minmax(0, 1fr));
-    gap: 0.5rem;
-    height: 100%;
-    padding: 1rem;
+    grid-template-columns: repeat(6, minmax(0, 1.15rem));
+    grid-template-rows: repeat(2, minmax(0, 1.15rem));
+    gap: 0.35rem;
+    width: max-content;
+    max-width: 100%;
+    height: auto;
+    margin: auto;
+    padding: 0.75rem;
   }
 
   .stage-cal span {
@@ -404,16 +428,37 @@
   }
 
   .stage-frames {
-    @apply flex items-center gap-3 px-5;
+    @apply mx-auto flex h-full w-max max-w-full items-center gap-2 px-3;
   }
 
   .stage-frames span {
-    @apply h-24 w-28 shrink-0 rounded-2xl border border-white/15 bg-white/10 motion-safe:animate-frames sm:h-28 sm:w-36;
+    @apply h-16 w-[4.25rem] shrink-0 rounded-xl border border-white/15 bg-white/10 motion-safe:animate-frames sm:h-20 sm:w-24;
   }
 
   .stage-frames span:nth-child(1) { background: #fff; }
   .stage-frames span:nth-child(2) { animation-delay: 180ms; }
   .stage-frames span:nth-child(3) { animation-delay: 360ms; background: rgba(255,255,255,0.28); }
+
+  .stage-camera {
+    @apply flex items-center justify-center;
+  }
+
+  .stage-camera-svg {
+    width: min(9.5rem, 70%);
+    height: auto;
+    fill: none;
+    stroke: #fff;
+    stroke-width: 3.5;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+  }
+
+  .stage-camera-lens {
+    fill: #fff;
+    stroke: none;
+    transform-origin: 84px 66px;
+    animation: camera-blink 3.2s ease-in-out infinite;
+  }
 }
 
 @layer utilities {
@@ -517,6 +562,11 @@
   100% { transform: scale(1.35); opacity: 0; }
 }
 
+@keyframes camera-blink {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(0.72); opacity: 0.55; }
+}
+
 @keyframes orbit {
   to { transform: rotate(360deg); }
 }
@@ -546,7 +596,8 @@
   .stage-bars span,
   .stage-grid span,
   .stage-cal span,
-  .stage-frames span {
+  .stage-frames span,
+  .stage-camera-lens {
     animation: none !important;
   }
 }

@@ -1,3 +1,4 @@
+import { ArrowUpRight } from 'lucide-react';
 import { projects } from '@/data/portfolio';
 import AnimatedText, { Reveal } from '@/components/AnimatedText';
 import { ProjectScene } from '@/components/MotionScenes';
@@ -23,18 +24,23 @@ export default function ProjectsSection() {
         </Reveal>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2 md:gap-5">
-        {projects.map((project, index) => (
-          <Reveal key={project.id} delay={index * 70}>
-            <article className="project-card h-full">
+      <div className="projects-grid">
+        {projects.map((project, index) => {
+          const card = (
+            <>
               <ProjectScene id={project.id} />
-              <div className="flex flex-1 flex-col gap-5 p-5 sm:p-6">
+              <div className="flex flex-1 flex-col gap-4 p-4 sm:gap-5 sm:p-5">
                 <div className="space-y-3">
                   <div className="flex items-center justify-between gap-3 text-[10px] uppercase tracking-[0.18em] text-white/45 sm:text-xs">
                     <span>{project.category}</span>
                     <span>{project.year}</span>
                   </div>
-                  <h3 className="font-display text-2xl font-semibold tracking-tight text-white">{project.title}</h3>
+                  <h3 className="flex items-start justify-between gap-3 font-display text-xl font-semibold tracking-tight text-white sm:text-2xl">
+                    {project.title}
+                    {project.href ? (
+                      <ArrowUpRight className="mt-1 h-5 w-5 shrink-0 text-white/70" aria-hidden="true" />
+                    ) : null}
+                  </h3>
                   <AnimatedText text={project.description} className="text-[15px] leading-relaxed" />
                 </div>
                 <ul className="mt-auto flex flex-wrap gap-2">
@@ -45,9 +51,26 @@ export default function ProjectsSection() {
                   ))}
                 </ul>
               </div>
-            </article>
-          </Reveal>
-        ))}
+            </>
+          );
+
+          return (
+            <Reveal key={project.id} delay={index * 70}>
+              {project.href ? (
+                <a
+                  href={project.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="project-card project-card--link h-full"
+                >
+                  {card}
+                </a>
+              ) : (
+                <article className="project-card h-full">{card}</article>
+              )}
+            </Reveal>
+          );
+        })}
       </div>
     </section>
   );
