@@ -1,4 +1,5 @@
 name: Deploy to GitHub Pages
+# Builds dist and publishes that folder to GitHub Pages.
 
 on:
   push:
